@@ -1,0 +1,30 @@
+<div id="topBar" class="top-bar__container">
+    <div id="menuDropdown" class="top-bar__menu">
+        <button mat-mini-fab color="accent" [matMenuTriggerFor]="welnaMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #welnaMenu="matMenu" xPosition="after" class="top-bar__menu">
+            <button mat-menu-item>
+                <a routerLink="/yarn" routerLinkActive="menu-link--active" class="menu-link">
+                    Szukaj włóczki
+                </a>
+            </button>
+            <button mat-menu-item>
+                <a routerLink="/pattern" routerLinkActive="menu-link--active" class="menu-link">
+                    Szukaj schematu
+                </a>
+            </button>
+        </mat-menu>
+    </div>
+    <div id="welnaLogo" class="top-bar__logo"  routerLink="/yarn" class="menu-link">
+        <img src="../../assets/images/welna.png" alt="welna logo">
+    </div>
+    <div id=loginSection class="login__container">
+        <button mat-mini-fab color="primary" class="login__item">
+            <mat-icon>person</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="login__item">
+            <mat-icon>favorite</mat-icon>
+        </button>
+    </div>
+</div>

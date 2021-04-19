@@ -1,0 +1,20 @@
+/* GLOBAL VARIABLES */
+:root {
+    --base-color: #000;
+    --primary-color: #673ab7;
+    --accent-color: #ffd740;
+    --warn-color: #f44336;
+}
+
+/*************************/
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background: url("/assets/images/background-yellow-grey.svg");
+    background-size: cover;
+}

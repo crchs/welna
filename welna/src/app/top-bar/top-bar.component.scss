@@ -1,0 +1,30 @@
+.top-bar__container {
+    padding: 0 10%;
+    height: 5rem;
+    line-height: 5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-link {
+    text-decoration: none;
+    outline: none;
+
+    &--active {
+        font-weight: bold;
+    }
+}
+
+.login {
+    &__container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    &__item {
+        margin-left: 1rem;
+        //TODO remove when account management implemented
+        display: none;
+    }
+}
