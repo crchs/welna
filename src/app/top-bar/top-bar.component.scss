@@ -4,6 +4,11 @@
     line-height: 5rem;
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 600px) {
+        padding: 0 3%;
+        background-color: rgba(white, 0.8);
+    }
 }
 
 .menu-link {
@@ -25,6 +30,6 @@
     &__item {
         margin-left: 1rem;
         //TODO remove when account management implemented
-        display: none;
+        display: n/one;
     }
 }
