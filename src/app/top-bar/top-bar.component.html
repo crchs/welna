@@ -4,20 +4,16 @@
             <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #welnaMenu="matMenu" xPosition="after" class="top-bar__menu">
-            <button mat-menu-item>
-                <a routerLink="/yarn" routerLinkActive="menu-link--active" class="menu-link">
+            <button mat-menu-item routerLink="/yarn" routerLinkActive="menu-link--active">
                     Szukaj włóczki
-                </a>
             </button>
-            <button mat-menu-item>
-                <a routerLink="/pattern" routerLinkActive="menu-link--active" class="menu-link">
+            <button mat-menu-item routerLink="/pattern" routerLinkActive="menu-link--active">
                     Szukaj schematu
-                </a>
             </button>
         </mat-menu>
     </div>
-    <div id="welnaLogo" class="top-bar__logo"  routerLink="/yarn" class="menu-link">
-        <img src="assets/images/welna.png" alt="welna logo">
+    <div id="welnaLogo" class="top-bar__logo"  routerLink="/yarn">
+        <img src="assets/images/welna3.png" class="top-bar__logo__image" alt="welna logo">
     </div>
     <div id=loginSection class="login__container">
         <button mat-mini-fab color="primary" class="login__item">

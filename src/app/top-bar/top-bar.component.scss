@@ -1,9 +1,9 @@
 .top-bar__container {
     padding: 0 10%;
     height: 5rem;
-    line-height: 5rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     @media (max-width: 600px) {
         padding: 0 3%;
@@ -11,12 +11,20 @@
     }
 }
 
-.menu-link {
-    text-decoration: none;
-    outline: none;
+.menu-link--active {
+    font-weight: bold;
+}
 
-    &--active {
-        font-weight: bold;
+.top-bar__logo {
+    margin-top: 3rem;
+
+    @media (max-width: 600px) {
+        width: 9rem;
+        margin-top: 1rem;
+
+        &__image {
+            width: 100%;
+        }
     }
 }
 
