@@ -1,4 +1,4 @@
 export interface Category {
-    key: string,
+    englishTranslation: string,
     name: string
 }

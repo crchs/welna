@@ -16,15 +16,14 @@
 }
 
 .top-bar__logo {
-    margin-top: 1rem;
-    width: 11rem;
-
-    &__image {
-        width: 100%;
-    }
+    font-family: 'Patrick Hand', cursive;
+    font-size: 90px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px black;
+    color: white;
 
     @media (max-width: 600px) {
-        width: 9rem;
+        font-size: 80px;
     }
 }
 

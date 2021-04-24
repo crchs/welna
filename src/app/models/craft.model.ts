@@ -1,4 +1,6 @@
+import { CraftType } from "./craftType.enum";
+
 export interface Craft {
-    key: string,
-    name: string
+    key: CraftType,
+    name: string,
 }

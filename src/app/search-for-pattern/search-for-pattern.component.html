@@ -1,41 +1,5 @@
-<div>
-    <form (ngSubmit)="searchPatterns()" [formGroup]="form" [style.fontSize.px]="getFontSize()">
-
-        <mat-form-field appearance="outline" id="craftSelect">
-            <mat-label>Technika</mat-label>
-            <mat-select formControlName="crafts">
-                <mat-option *ngFor='let craft of crafts' value="{{craft.key}}">
-                    {{craft.name}}
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="form.controls.crafts.invalid">Wybierz technikę</mat-error>
-        </mat-form-field>
-
-        <mat-form-field *ngIf="sizes" appearance="outline" id="sizeSelect">
-            <mat-label>Rozmiar</mat-label>
-            <mat-select formControlName="size">
-                <mat-option *ngFor='let size of sizes' value="{{size.key}}">
-                    {{size.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field *ngIf="categories" appearance="outline" id="categorySelect">
-            <mat-label>Rozmiar</mat-label>
-            <mat-select formControlName="categories">
-                <mat-option *ngFor='let category of categories' value="{{category.key}}">
-                    {{category.name}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-slide-toggle  *ngIf="form.status !== 'INVALID'" formControlName="freePattern" [color]="freePatternToggle.color"
-            [checked]="freePatternToggle.checked" [disabled]="freePatternToggle.disabled">
-            Darmowy schemat
-        </mat-slide-toggle>
-
-        <button *ngIf="form.status !== 'INVALID'" type="submit" mat-raised-button color="primary" class="button">
-            Szukaj
-        </button>
-    </form>
+<div class="pattern-search">
+    <pattern-form (searchPattern)="onSearchPattern($event)" class="pattern-search__form"></pattern-form>
+    <spinner *ngIf="showSpinner" class="pattern-search__spinner"></spinner>
+    <pattern-list [patterns$]="patterns$" class="pattern-search__list" *ngIf="patterns$"></pattern-list>    
 </div>
