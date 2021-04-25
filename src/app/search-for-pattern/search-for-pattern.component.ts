@@ -9,7 +9,7 @@ import { RavelryService } from '../services/ravelry.service';
   templateUrl: './search-for-pattern.component.html',
   styleUrls: ['./search-for-pattern.component.scss']
 })
-export class SearchForPatternComponent implements OnInit {
+export class SearchForPatternComponent {
   patterns$: Observable<Pattern[]>;
   showSpinner: boolean = false;
   showError: boolean = false;
@@ -23,10 +23,6 @@ export class SearchForPatternComponent implements OnInit {
   constructor(
     private ravelry: RavelryService,
   ) { }
-
-  ngOnInit(): void {
-
-  }
 
   onSearchPattern(event): void {
     this.showSpinner = true;

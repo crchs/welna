@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { merge, Observable, of, throwError } from 'rxjs';
-import { concatMap, filter, map, mergeMap, tap, toArray } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { concatMap, filter, map, toArray } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { CraftType } from '../models/craftType.enum';
 import { NeedleSize } from '../models/needle-size.model';
@@ -23,7 +23,7 @@ export class RavelryService {
   readonly ravelryBaseUrl = 'https://api.ravelry.com/';
   readonly httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-    //TODO: way to hide this
+    //TODO: way to hide this -- store in firebase?
     'Authorization': 'Basic ' + btoa('206c16d1b8ceec8a74b77dcb783ab01c:kTzrxxXd7xWMF3iY9Q0FDJawdOpCsQDLMu4HIPiZ')
   });
 
@@ -45,6 +45,12 @@ export class RavelryService {
         filter(size => {
           return this.getPopularSizes(size.metric);
         }),
+        map((size) => {
+          return {
+            ...size,
+            metric: Number.isInteger(size.metric) ? size.metric.toFixed(1) : size.metric
+          } as NeedleSize
+        }),
         toArray()
       )
   }
@@ -56,8 +62,7 @@ export class RavelryService {
   searchForPatterns(searchParams): Observable<Pattern[]> {
     let params = new HttpParams();
     params = params.append('craft', searchParams.craft);
-    //TODO: ravelry service accepts needle size of the exactly specified format, handle ints
-    params = params.append(searchParams.craft === CraftType.CROCHET ? 'hooks' : 'needles', searchParams.needleSize);
+    params = params.append(searchParams.craft === CraftType.CROCHET ? 'hooks' : 'needles', `${searchParams.needleSize}mm`);
     params = params.append('pc', searchParams.category);
     params = params.append('availability', searchParams.isFree ? 'free' : '');
 

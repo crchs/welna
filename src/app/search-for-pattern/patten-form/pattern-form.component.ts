@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { Category } from 'src/app/models/category.model';
 import { Craft } from 'src/app/models/craft.model';
 import { CraftType } from 'src/app/models/craftType.enum';
@@ -17,8 +18,7 @@ export class PatternFormComponent implements OnInit {
   @Output() searchPattern = new EventEmitter<any>();
 
   form: FormGroup;
-  colorControl = new FormControl('primary');
-  fontSizeControl = new FormControl(16, Validators.min(10));
+  sizeError: boolean = false;
   freePatternToggle: any = {
     color: 'accent',
     checked: false,
@@ -45,8 +45,6 @@ export class PatternFormComponent implements OnInit {
     private ravelry: RavelryService,
   ) {
     this.form = formBuilder.group({
-      color: this.colorControl,
-      fontSize: this.fontSizeControl,
       crafts: ['', Validators.required],
       needleSize: ['', Validators.required],
       categories: ['', Validators.required],
@@ -57,15 +55,13 @@ export class PatternFormComponent implements OnInit {
   ngOnInit(): void {
     this.form.controls.crafts.valueChanges
       .subscribe(val => {
-        this.sizes$ = this.ravelry.fetchNeedlesSizes(val)
-
+        this.sizes$ = this.fetchSizes(val);
+        this.form.controls['needleSize'].reset();
       });
   }
 
   searchPatterns(): void {
     if (!this.form.valid) {
-      //TODO to be handled
-      console.warn('INVALIDA');
       return;
     }
 
@@ -77,8 +73,15 @@ export class PatternFormComponent implements OnInit {
     })
   }
 
-  getFontSize(): number {
-    return Math.max(10, this.fontSizeControl.value);
+  fetchSizes(val): Observable<NeedleSize[]> {
+    this.sizeError = false;
+    return this.ravelry.fetchNeedlesSizes(val)
+      .pipe(
+        catchError((error) => {
+          this.sizeError = true;
+          return of(error);
+        }),
+        shareReplay()
+      )
   }
-
 }
