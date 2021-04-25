@@ -23,7 +23,7 @@ export const CATEGORIES: Category[] = [
     },
     {
         name: "Czapki",
-        englishTranslation: "hats"
+        englishTranslation: "hat"
     },
     {
         name: "Torby i plecaki",

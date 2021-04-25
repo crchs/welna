@@ -7,13 +7,7 @@ import { Pattern } from 'src/app/models/pattern.model';
   templateUrl: './pattern-list.component.html',
   styleUrls: ['./pattern-list.component.scss']
 })
-export class PatternListComponent implements OnInit {
+export class PatternListComponent {
   @Input() patterns$: Observable<Pattern[]>;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log('inited', this.patterns$)
-  }
-
+  @Input() spinner: boolean;
 }

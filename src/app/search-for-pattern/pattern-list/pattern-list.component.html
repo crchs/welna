@@ -14,3 +14,6 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+<spinner *ngIf="spinner"></spinner>
+<no-results *ngIf="!spinner && !(patterns$ | async)?.length"></no-results>

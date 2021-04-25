@@ -1,0 +1,16 @@
+.something-went-wrong {
+    &__container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    &__image {
+        width: 600px;
+
+        @media (max-width: 800px) {
+            max-width: 350px;
+        }
+    }
+}

@@ -24,6 +24,8 @@ import { MatListModule } from '@angular/material/list';
 import { PatternListComponent } from './search-for-pattern/pattern-list/pattern-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { SomethingWentWrongComponent } from './shared-components/something-went-wrong/something-went-wrong.component';
+import { NoResultsComponent } from './shared-components/no-results/no-results.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
     FooterComponent,
     PatternFormComponent,
     SpinnerComponent,
-    PatternListComponent
+    PatternListComponent,
+    SomethingWentWrongComponent,
+    NoResultsComponent
   ],
   imports: [
     HttpClientModule,

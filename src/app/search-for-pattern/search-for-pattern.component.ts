@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 import { Pattern } from '../models/pattern.model';
 import { RavelryService } from '../services/ravelry.service';
 
@@ -12,10 +12,17 @@ import { RavelryService } from '../services/ravelry.service';
 export class SearchForPatternComponent implements OnInit {
   patterns$: Observable<Pattern[]>;
   showSpinner: boolean = false;
+  showError: boolean = false;
+  searchParams: any = {
+    searchedCraft: '',
+    searchedNeedleSize: '',
+    searchedCategory: '',
+    searchedIsFree: ''
+  }
 
   constructor(
     private ravelry: RavelryService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -23,10 +30,26 @@ export class SearchForPatternComponent implements OnInit {
 
   onSearchPattern(event): void {
     this.showSpinner = true;
-    this.patterns$ =  this.ravelry.searchForPatterns(
-      event.craft, event.needleSize, event.category, event.isFree
+    this.showError = false;
+    this.searchParams = event ==='retry' ? this.searchParams : {
+      craft: event.craft,
+      needleSize: event.needleSize,
+      category: event.category,
+      isFree: event.isFree
+    }
+
+    this.patterns$ = this.ravelry.searchForPatterns(
+      this.searchParams
     ).pipe(
-      finalize(() => {this.showSpinner = false;})
+      catchError((error) => {
+        this.showError = true;
+        return of(error);
+      }),
+      finalize(() => { this.showSpinner = false; })
     )
+  }
+
+  onTryAgain(): void {
+    this.onSearchPattern('retry');
   }
 }

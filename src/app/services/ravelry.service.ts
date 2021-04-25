@@ -23,7 +23,7 @@ export class RavelryService {
   readonly ravelryBaseUrl = 'https://api.ravelry.com/';
   readonly httpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
-    //TODO way to hide this
+    //TODO: way to hide this
     'Authorization': 'Basic ' + btoa('206c16d1b8ceec8a74b77dcb783ab01c:kTzrxxXd7xWMF3iY9Q0FDJawdOpCsQDLMu4HIPiZ')
   });
 
@@ -53,14 +53,13 @@ export class RavelryService {
     return of(CATEGORIES);
   }
 
-  searchForPatterns(craft, needleSize, category, isFree): Observable<Pattern[]> {
+  searchForPatterns(searchParams): Observable<Pattern[]> {
     let params = new HttpParams();
-    params = params.append('craft', craft);
-    params = params.append(craft === CraftType.CROCHET ? 'hooks' : 'needles', needleSize);
-    params = params.append('pc', category);
-    params = params.append('availability', isFree ? 'free' : '');
-
-    console.log('params', params)
+    params = params.append('craft', searchParams.craft);
+    //TODO: ravelry service accepts needle size of the exactly specified format, handle ints
+    params = params.append(searchParams.craft === CraftType.CROCHET ? 'hooks' : 'needles', searchParams.needleSize);
+    params = params.append('pc', searchParams.category);
+    params = params.append('availability', searchParams.isFree ? 'free' : '');
 
     return this.http
       .get<Patterns>(`${this.ravelryBaseUrl}patterns/search.json`, {
