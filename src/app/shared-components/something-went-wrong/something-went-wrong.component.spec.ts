@@ -1,0 +1,26 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SomethingWentWrongComponent } from './something-went-wrong.component';
+
+describe('SomethingWentWrongComponent', () => {
+  let component: SomethingWentWrongComponent;
+  let fixture: ComponentFixture<SomethingWentWrongComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SomethingWentWrongComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SomethingWentWrongComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should emit try again event on button click', () => {
+    spyOn(component.tryAgainEvent, 'emit');
+    component.tryAgain();
+    expect(component.tryAgainEvent.emit).toHaveBeenCalled();
+  });
+});

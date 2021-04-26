@@ -1,0 +1,46 @@
+<form class="pattern-form" (ngSubmit)="searchPatterns()"
+ [formGroup]="form" [style.fontSize.px]="'16'">
+
+    <mat-form-field appearance="outline">
+        <mat-label>Technika</mat-label>
+        <mat-select formControlName="crafts">
+            <mat-option *ngFor='let craft of crafts' value="{{craft.key}}" id="craftSelect">
+                {{craft.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.controls.crafts.invalid">Wybierz technikę</mat-error>
+    </mat-form-field>
+    <div *ngIf="sizeError">
+        <p>Błąd serwisu.</p>
+        <button mat-flat-button (click)="fetchSizes(form.controls.crafts.value)" type="button" color="accent">Spróbuj jeszcze raz</button>
+    </div>
+
+    <spinner size="small" *ngIf="!sizes$ && !categories$"></spinner>
+
+    <mat-form-field *ngIf="sizes$ && !sizeError" appearance="outline" id="needleSize">
+        <mat-label>Rozmiar {{form.controls.crafts.value === 'knitting' ? 'drutów' : 'szydełka'}}</mat-label>
+        <mat-select formControlName="needleSize">
+            <mat-option *ngFor='let size of sizes$ | async' value="{{size.metric}}">
+                {{size.metric}}mm
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="sizes$ && !sizeError" appearance="outline" id="categorySelect">
+        <mat-label>Element</mat-label>
+        <mat-select formControlName="categories">
+            <mat-option *ngFor='let category of categories$ | async' value="{{category.englishTranslation}}">
+                {{category.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle *ngIf="form.status !== 'INVALID'" formControlName="freePattern" [color]="freePatternToggle.color"
+        [checked]="freePatternToggle.checked" [disabled]="freePatternToggle.disabled">
+        Darmowy schemat
+    </mat-slide-toggle>
+
+    <button *ngIf="form.status !== 'INVALID'" type="submit" mat-raised-button color="primary" class="button">
+        Szukaj
+    </button>
+</form>

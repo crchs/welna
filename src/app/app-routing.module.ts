@@ -5,8 +5,8 @@ import { SearchForYarnComponent } from './search-for-yarn/search-for-yarn.compon
 
 const routes: Routes = [
   { path: '', component: SearchForYarnComponent },
-  { path: 'yarn', component: SearchForYarnComponent },
-  { path: 'pattern', component: SearchForPatternComponent },
+  { path: 'wloczka', component: SearchForYarnComponent },
+  { path: 'schemat', component: SearchForPatternComponent },
 ];
 
 @NgModule({
