@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SomethingWentWrongComponent } from './something-went-wrong.component';
 
 describe('SomethingWentWrongComponent', () => {
@@ -19,7 +18,9 @@ describe('SomethingWentWrongComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should emit try again event on button click', () => {
+    spyOn(component.tryAgainEvent, 'emit');
+    component.tryAgain();
+    expect(component.tryAgainEvent.emit).toHaveBeenCalled();
   });
 });

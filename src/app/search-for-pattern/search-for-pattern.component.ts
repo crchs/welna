@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Pattern } from '../models/pattern.model';
@@ -24,7 +24,7 @@ export class SearchForPatternComponent {
     private ravelry: RavelryService,
   ) { }
 
-  onSearchPattern(event): void {
+  onSearchPattern(event?): void {
     this.showSpinner = true;
     this.showError = false;
     this.searchParams = event ==='retry' ? this.searchParams : {

@@ -1,10 +1,10 @@
 <form class="pattern-form" (ngSubmit)="searchPatterns()"
  [formGroup]="form" [style.fontSize.px]="'16'">
 
-    <mat-form-field appearance="outline" id="craftSelect">
+    <mat-form-field appearance="outline">
         <mat-label>Technika</mat-label>
         <mat-select formControlName="crafts">
-            <mat-option *ngFor='let craft of crafts' value="{{craft.key}}">
+            <mat-option *ngFor='let craft of crafts' value="{{craft.key}}" id="craftSelect">
                 {{craft.name}}
             </mat-option>
         </mat-select>
