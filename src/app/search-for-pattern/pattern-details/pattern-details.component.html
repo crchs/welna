@@ -1,0 +1,13 @@
+<div *ngIf="pattern$ | async as pattern" class="details__grid">
+    <div class="details__header">
+        <pattern-details-table *ngIf="pattern$" [pattern]="pattern$ | async">
+        </pattern-details-table>
+
+    </div>
+
+    <div class="details__images-menu"></div>
+    <div class="details__images">
+        <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+    </div>
+    <div class="details__content"></div>
+</div>

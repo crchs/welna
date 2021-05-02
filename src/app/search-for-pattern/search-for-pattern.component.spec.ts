@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
-import { Pattern } from '../models/pattern.model';
+import { Pattern } from '../models/pattern-partial.model';
 import { RavelryService } from '../services/ravelry.service';
 import { SearchForPatternComponent } from './search-for-pattern.component';
 

@@ -1,0 +1,28 @@
+.pattern-details {
+    &__top-header {
+        display: flex;
+        justify-content: space-between;
+
+        h2 {
+            color: var(--primary-color);
+        }
+    }
+
+    &__table {
+        display: flex;
+        justify-content: space-around;
+
+        h3 {
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        &-item {
+            margin-bottom: 1em;
+        }
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+        }
+    }
+}

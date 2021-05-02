@@ -26,6 +26,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SomethingWentWrongComponent } from './shared-components/something-went-wrong/something-went-wrong.component';
 import { NoResultsComponent } from './shared-components/no-results/no-results.component';
+import { PatternDetailsComponent } from './search-for-pattern/pattern-details/pattern-details.component';
+import { PatternDetailsTableComponent } from './search-for-pattern/pattern-details/pattern-details-table/pattern-details-table.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { NoResultsComponent } from './shared-components/no-results/no-results.co
     SpinnerComponent,
     PatternListComponent,
     SomethingWentWrongComponent,
-    NoResultsComponent
+    NoResultsComponent,
+    PatternDetailsComponent,
+    PatternDetailsTableComponent,
   ],
   imports: [
     HttpClientModule,
@@ -58,6 +63,7 @@ import { NoResultsComponent } from './shared-components/no-results/no-results.co
     MatListModule,
     MatCardModule,
     MatGridListModule,
+    NgImageSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

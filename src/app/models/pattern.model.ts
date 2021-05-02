@@ -1,10 +1,7 @@
-import { Designer } from "./designer.model";
-import { Photo } from "./photo.model";
+import { PatternAuthor } from "./pattern-author.model";
 
 export interface Pattern {
-    designer: Designer,
-    first_photo: Photo,		
-    id: number,	
-    name: string,		
-    permalink: string
+    pattern_author: PatternAuthor,
+    name: string,
+    packs: any
 }

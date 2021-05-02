@@ -1,0 +1,31 @@
+<div *ngIf="pattern" class="pattern-details__top-header">
+    <h2>Wzór: {{ pattern.name }}</h2>
+    <button mat-icon-button>
+        <mat-icon routerLink="/schemat">close_fullscreen</mat-icon>
+    </button>
+</div>
+<div *ngIf="pattern" class="pattern-details__table">
+    <div class="pattern-details__table-item">
+        <h3>Autor</h3>
+        <span>{{pattern.pattern_author.name}}</span>
+    </div>
+    <div class="pattern-details__table-item">
+        <h3>Sugerowana włóczka</h3>
+        <span *ngFor="let yarn of pattern.packs">
+            {{yarn.yarn_name}};
+        </span>
+    </div>
+    <div class="pattern-details__table-item">
+        <h3>Rozmiar {{pattern.craft.id == 2 ? 'Drutów' : 'Szydełka'}}</h3>
+        <span *ngFor="let size of pattern.pattern_needle_sizes">
+            {{size.metric}}mm;
+        </span>
+    </div>
+    <div class="pattern-details__table-item">
+        <h3>Cena</h3>
+        <span *ngIf="pattern.free">Darmoszka</span>
+        <span *ngIf="!pattern.free">
+            {{pattern.price}}{{pattern.currency_symbol}}
+        </span>
+    </div>
+</div>

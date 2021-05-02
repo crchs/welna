@@ -3,7 +3,7 @@ import { RavelryService } from './ravelry.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 import { CraftType } from '../models/craftType.enum';
-import { Pattern } from '../models/pattern.model';
+import { Pattern } from '../models/pattern-partial.model';
 import { of } from 'rxjs';
 
 describe('RavelryService', () => {

@@ -15,6 +15,23 @@
         @media (max-width: 550px) {
             width: 90%;
         }
+
+        &__header {
+            height: 70px;
+        }
+
+        &__content {
+            height: 250px;
+        }
+
+        &__image-container {
+            max-height: 200px;
+            overflow: hidden;
+        }
+
+        &__image {
+
+        }
     }
 }
 
