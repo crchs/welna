@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Pattern } from 'src/app/models/pattern.model';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { PatternPartial } from 'src/app/models/pattern-partial.model';
 
 @Component({
   selector: 'pattern-list',
@@ -8,6 +8,14 @@ import { Pattern } from 'src/app/models/pattern.model';
   styleUrls: ['./pattern-list.component.scss']
 })
 export class PatternListComponent {
-  @Input() patterns$: Observable<Pattern[]>;
+  @Input() patterns$: PatternPartial[] | null;
   @Input() spinner: boolean;
+
+  constructor(
+    private router: Router
+  ) {}
+
+  openDetails(id): void {
+    this.router.navigate(['schemat', id])
+  }
 }

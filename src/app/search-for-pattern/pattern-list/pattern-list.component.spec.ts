@@ -1,5 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { PatternListComponent } from './pattern-list.component';
 
 describe('PatternListComponent', () => {
@@ -8,7 +9,9 @@ describe('PatternListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PatternListComponent ]
+      imports: [RouterTestingModule],
+      declarations: [ PatternListComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
   });

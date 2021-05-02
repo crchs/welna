@@ -1,9 +1,13 @@
-<div class="pattern-search">
+<div *ngIf="!detailsOpened" class="pattern-search">
     <pattern-form (searchPattern)="onSearchPattern($event)"
         class="pattern-search__form"></pattern-form>
-    <pattern-list [patterns$]="patterns$" [spinner]="showSpinner" class="pattern-search__list"
-        *ngIf="patterns$ && !showError"></pattern-list>
+    <pattern-list [patterns$]="patterns$ | async" [spinner]="showSpinner"
+        class="pattern-search__list" *ngIf="patterns$ && !showError">
+    </pattern-list>
     <something-went-wrong *ngIf="!showSpinner && showError"
         (tryAgainEvent)="onTryAgain()" class="pattern-search__error">
     </something-went-wrong>
 </div>
+<router-outlet (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)">
+</router-outlet>

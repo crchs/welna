@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-import { Pattern } from '../models/pattern.model';
+import { PatternPartial } from '../models/pattern-partial.model';
 import { RavelryService } from '../services/ravelry.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { RavelryService } from '../services/ravelry.service';
   styleUrls: ['./search-for-pattern.component.scss']
 })
 export class SearchForPatternComponent {
-  patterns$: Observable<Pattern[]>;
+  detailsOpened: boolean;
+  patterns$: Observable<PatternPartial[]>;
   showSpinner: boolean = false;
   showError: boolean = false;
   searchParams: any = {
@@ -22,12 +24,14 @@ export class SearchForPatternComponent {
 
   constructor(
     private ravelry: RavelryService,
+    private router: Router
   ) { }
 
   onSearchPattern(event?): void {
+    this.router.navigate(['/schemat']);
     this.showSpinner = true;
     this.showError = false;
-    this.searchParams = event ==='retry' ? this.searchParams : {
+    this.searchParams = event === 'retry' ? this.searchParams : {
       craft: event.craft,
       needleSize: event.needleSize,
       category: event.category,
@@ -47,5 +51,12 @@ export class SearchForPatternComponent {
 
   onTryAgain(): void {
     this.onSearchPattern('retry');
+  }
+
+  onActivate(e): void {
+    this.detailsOpened = true;
+  }
+  onDeactivate(e): void {
+    this.detailsOpened = false;
   }
 }

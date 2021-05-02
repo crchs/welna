@@ -1,0 +1,33 @@
+.pattern-details {
+    &__top-header {
+        display: flex;
+        justify-content: space-between;
+
+        h2 {
+            color: var(--primary-color);
+        }
+    }
+
+    &__table {
+        display: flex;
+        justify-content: space-between;
+
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+        }
+    }
+
+    &__item {
+        margin-bottom: 1em;
+
+        h3 {
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+    }
+
+    &__difficulty{
+        margin-bottom: 2rem;
+    }
+}

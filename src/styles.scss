@@ -20,3 +20,11 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+a {
+    text-decoration: none;    
+    color: var(--primary-color);
+}
+
+button a {    
+    color: #fff;
+}

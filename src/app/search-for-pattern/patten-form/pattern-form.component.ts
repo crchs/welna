@@ -6,7 +6,7 @@ import { Category } from 'src/app/models/category.model';
 import { Craft } from 'src/app/models/craft.model';
 import { CraftType } from 'src/app/models/craftType.enum';
 import { NeedleSize } from 'src/app/models/needle-size.model';
-import { Pattern } from 'src/app/models/pattern.model';
+import { PatternPartial } from 'src/app/models/pattern-partial.model';
 import { RavelryService } from 'src/app/services/ravelry.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class PatternFormComponent implements OnInit {
 
   sizes$: Observable<NeedleSize[]>;
   categories$: Observable<Category[]> = this.ravelry.fetchPatternCategories();
-  patterns$: Observable<Pattern[]>;
+  patterns$: Observable<PatternPartial[]>;
 
   constructor(
     formBuilder: FormBuilder,

@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { concatMap, filter, map, toArray } from 'rxjs/operators';
+import { concatMap, filter, map, shareReplay, toArray } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { CraftType } from '../models/craftType.enum';
 import { NeedleSize } from '../models/needle-size.model';
+import { PatternPartial } from '../models/pattern-partial.model';
 import { Pattern } from '../models/pattern.model';
 import { CATEGORIES } from './resources/pattern-categories';
 
@@ -13,7 +14,11 @@ type NeedleSizes = {
 }
 
 type Patterns = {
-  patterns: Pattern[];
+  patterns: PatternPartial[];
+}
+
+type PatternEnvelope = {
+  pattern: Pattern;
 }
 
 @Injectable({
@@ -28,7 +33,7 @@ export class RavelryService {
   });
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   fetchNeedlesSizes(craft: CraftType): Observable<NeedleSize[]> {
@@ -59,7 +64,7 @@ export class RavelryService {
     return of(CATEGORIES);
   }
 
-  searchForPatterns(searchParams): Observable<Pattern[]> {
+  searchForPatterns(searchParams): Observable<PatternPartial[]> {
     let params = new HttpParams();
     params = params.append('craft', searchParams.craft);
     params = params.append(searchParams.craft === CraftType.CROCHET ? 'hooks' : 'needles', `${searchParams.needleSize}mm`);
@@ -75,6 +80,19 @@ export class RavelryService {
         map(response => {
           return response.patterns
         })
+      )
+  }
+
+  getPatternDetails(id): Observable<Pattern> {
+    return this.http
+      .get<PatternEnvelope>(`${this.ravelryBaseUrl}patterns/${id}.json`, {
+        headers: this.httpHeaders
+      })
+      .pipe(
+        map(response => {
+          return response.pattern;
+        }),
+        shareReplay()
       )
   }
 

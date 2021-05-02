@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchForYarnComponent } from './search-for-yarn.component';
+import { PatternDetailsTableComponent } from './pattern-details-table.component';
 
-describe('SearchForYarnComponent', () => {
-  let component: SearchForYarnComponent;
-  let fixture: ComponentFixture<SearchForYarnComponent>;
+describe('PatternDetailsTableComponent', () => {
+  let component: PatternDetailsTableComponent;
+  let fixture: ComponentFixture<PatternDetailsTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchForYarnComponent ]
+      declarations: [ PatternDetailsTableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchForYarnComponent);
+    fixture = TestBed.createComponent(PatternDetailsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

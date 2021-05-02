@@ -1,10 +1,16 @@
-import { Designer } from "./designer.model";
-import { Photo } from "./photo.model";
+import { PatternAuthor } from "./pattern-author.model";
 
 export interface Pattern {
-    designer: Designer,
-    first_photo: Photo,		
-    id: number,	
-    name: string,		
-    permalink: string
+    pattern_author: PatternAuthor,
+    name: string,
+    packs: any,
+    photos: any,
+    sliderImages: any,
+    permalink: string,
+    difficulty_average: number,
+    currency_symbol: string,
+    price: number,
+    free: boolean,
+    pattern_needle_sizes: any[],
+    craft: any
 }
