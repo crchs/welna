@@ -1,14 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { RavelryService } from './ravelry.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
 import { CraftType } from '../models/craftType.enum';
-import { Pattern } from '../models/pattern-partial.model';
 import { of } from 'rxjs';
 
 describe('RavelryService', () => {
   let service: RavelryService;
-  let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
@@ -17,6 +14,10 @@ describe('RavelryService', () => {
     });
     service = TestBed.inject(RavelryService);
     httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    TestBed.resetTestingModule();
   });
 
   it('should fetch needle sizes', () => {
@@ -56,6 +57,7 @@ describe('RavelryService', () => {
       .subscribe();
     const req = httpTestingController.expectOne('https://api.ravelry.com/patterns/search.json?craft=crochet&hooks=5mm&pc=hat&availability=free');
     expect(req.request.method).toEqual('GET');
+    req.flush(of(true));
     httpTestingController.verify();
   });
 });

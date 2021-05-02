@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
@@ -5,7 +6,7 @@ import { Observable, of } from 'rxjs';
 import { Category } from 'src/app/models/category.model';
 import { CraftType } from 'src/app/models/craftType.enum';
 import { NeedleSize } from 'src/app/models/needle-size.model';
-import { Pattern } from 'src/app/models/pattern-partial.model';
+import { PatternPartial } from 'src/app/models/pattern-partial.model';
 import { RavelryService } from 'src/app/services/ravelry.service';
 import { PatternFormComponent } from './pattern-form.component';
 
@@ -16,7 +17,7 @@ describe('PatternFormComponent', () => {
   let ravelryService: RavelryService;
 
   ravelryServiceStub = {
-    searchForPatterns(params): Observable<Pattern[]> {
+    searchForPatterns(params): Observable<PatternPartial[]> {
       return of([]);
     },
     fetchNeedlesSizes(craft: CraftType): Observable<NeedleSize[]> {
@@ -33,7 +34,8 @@ describe('PatternFormComponent', () => {
       providers: [FormBuilder,
         { provide: RavelryService, useValue: ravelryServiceStub },
       ],
-      declarations: [PatternFormComponent]
+      declarations: [PatternFormComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   });

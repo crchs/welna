@@ -1,6 +1,8 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
-import { Pattern } from '../models/pattern-partial.model';
+import { PatternPartial } from '../models/pattern-partial.model';
 import { RavelryService } from '../services/ravelry.service';
 import { SearchForPatternComponent } from './search-for-pattern.component';
 
@@ -11,17 +13,21 @@ describe('SearchForPatternComponent', () => {
   let ravelryService: RavelryService;
 
   ravelryServiceStub = {
-    searchForPatterns(params): Observable<Pattern[]> {
+    searchForPatterns(params): Observable<PatternPartial[]> {
       return of([])
     }
   };
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({      
+      imports: [RouterTestingModule.withRoutes(
+        [{path: 'schemat', component: SearchForPatternComponent}]
+      )],
       declarations: [SearchForPatternComponent],
       providers: [
         { provide: RavelryService, useValue: ravelryServiceStub },
-      ]
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
   });
@@ -37,7 +43,6 @@ describe('SearchForPatternComponent', () => {
       category: 'hat',
       isFree: true
     }
-
   });
 
   it('should fetch patterns when form is submitted', () => {

@@ -24,7 +24,8 @@ export class PatternDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.showError = false;
-    this.pattern$ = this.route.paramMap.pipe(
+    this.pattern$ = this.route.paramMap
+    .pipe(
       switchMap((params: ParamMap) =>
         this.ravelryService.getPatternDetails(params.get('id'))
           .pipe(
