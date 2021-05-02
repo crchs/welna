@@ -7,5 +7,10 @@ export interface Pattern {
     photos: any,
     sliderImages: any,
     permalink: string,
-    difficulty_average: number
+    difficulty_average: number,
+    currency_symbol: string,
+    price: number,
+    free: boolean,
+    pattern_needle_sizes: any[],
+    craft: any
 }
