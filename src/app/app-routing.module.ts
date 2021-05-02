@@ -4,7 +4,7 @@ import { SearchForPatternComponent } from './search-for-pattern/search-for-patte
 import { SearchForYarnComponent } from './search-for-yarn/search-for-yarn.component';
 
 const routes: Routes = [
-  { path: '', component: SearchForYarnComponent },
+  { path: '', redirectTo: '/schemat', pathMatch: 'full' },
   { path: 'wloczka', component: SearchForYarnComponent },
   { path: 'schemat', component: SearchForPatternComponent },
 ];
@@ -14,5 +14,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-  
- }
+
+}
