@@ -1,32 +1,11 @@
 .details {
     &__grid {
-        display: grid;
-        height: 100%;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: auto auto auto;
-        grid-template-areas:
-            "header header header header"
-            "imagesmenu images images images"
-            "content content content content";
-    }
-
-    &__header {
-        grid-area: header;
-        // background-color: sandybrown;
-    }
-
-    &__images {
-        grid-area: images;
-        background-color: pink;
-
-        &-menu {
-            grid-area: imagesmenu;
-            background-color: yellow;
-        }
+        display: flex;
+        flex-direction: column;
     }
 
     &__content {
-        grid-area: content;
-        background-color: blue;
+        margin-top: 2em;
+        text-align: end;
     }
 }

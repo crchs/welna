@@ -30,9 +30,12 @@
         }
 
         &__image {
-
         }
     }
+}
+
+.card-list:hover {
+    cursor: pointer;
 }
 
 mat-card-actions {

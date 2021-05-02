@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Pattern } from 'src/app/models/pattern.model';
 
 @Component({
   selector: 'pattern-details-table',
@@ -6,14 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./pattern-details-table.component.scss']
 })
 export class PatternDetailsTableComponent implements OnInit {
-  @Input() pattern;
-  //todo add type
+  @Input() pattern: Pattern;
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log('this pattern', this.pattern)
-  }
-
-  
+  ngOnInit(): void { } 
 }

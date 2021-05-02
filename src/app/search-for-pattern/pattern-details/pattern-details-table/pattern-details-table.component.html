@@ -1,31 +1,45 @@
 <div *ngIf="pattern" class="pattern-details__top-header">
-    <h2>Wzór: {{ pattern.name }}</h2>
+    <h2>Wzór: 
+        <a href="{{ 'https://ravelry.com/patterns/library/' + pattern.permalink }}" target="_blank">
+            {{ pattern.name }}
+        </a>
+    </h2>
     <button mat-icon-button>
         <mat-icon routerLink="/schemat">close_fullscreen</mat-icon>
     </button>
 </div>
 <div *ngIf="pattern" class="pattern-details__table">
-    <div class="pattern-details__table-item">
+    <div class="pattern-details__item">
         <h3>Autor</h3>
-        <span>{{pattern.pattern_author.name}}</span>
+        <a href="{{ 'https://ravelry.com/designers/' + pattern.pattern_author.permalink }}"
+            target="_blank">
+            {{pattern.pattern_author.name}}
+        </a>
     </div>
-    <div class="pattern-details__table-item">
+    <div class="pattern-details__item">
         <h3>Sugerowana włóczka</h3>
         <span *ngFor="let yarn of pattern.packs">
-            {{yarn.yarn_name}};
+            <a href="{{ 'https://ravelry.com/yarns/library/' + yarn.yarn.permalink }}" target="_blank">
+                {{yarn.yarn_name}};
+            </a>
         </span>
     </div>
-    <div class="pattern-details__table-item">
+    <div class="pattern-details__item">
         <h3>Rozmiar {{pattern.craft.id == 2 ? 'Drutów' : 'Szydełka'}}</h3>
         <span *ngFor="let size of pattern.pattern_needle_sizes">
             {{size.metric}}mm;
         </span>
     </div>
-    <div class="pattern-details__table-item">
+    <div class="pattern-details__item">
         <h3>Cena</h3>
         <span *ngIf="pattern.free">Darmoszka</span>
         <span *ngIf="!pattern.free">
             {{pattern.price}}{{pattern.currency_symbol}}
         </span>
     </div>
+</div>
+<div *ngIf="pattern" class="pattern-details__difficulty">
+    <h3>Trudność</h3>
+    <mat-progress-bar mode="determinate" value="{{ pattern.difficulty_average * 10 }}">
+    </mat-progress-bar>
 </div>

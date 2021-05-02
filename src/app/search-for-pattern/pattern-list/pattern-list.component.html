@@ -1,5 +1,5 @@
 <div class="card-list">
-  <mat-card class="card-list__item" *ngFor="let pattern of patterns$ | async" 
+  <mat-card class="card-list__item" *ngFor="let pattern of patterns$" 
   [routerLink]="['/schemat', pattern.id]">
       <mat-card-header class="card-list__item__header">
         <mat-card-title>{{ pattern.name }}</mat-card-title>
@@ -13,13 +13,8 @@
             class="card-list__item__image">
         </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>
-          ZOBACZ
-        </button>
-      </mat-card-actions>
   </mat-card>
 </div>
 
 <spinner *ngIf="spinner"></spinner>
-<no-results *ngIf="!spinner && !(patterns$ | async)?.length"></no-results>
+<no-results *ngIf="!spinner && !patterns$?.length"></no-results>

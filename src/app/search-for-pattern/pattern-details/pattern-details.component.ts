@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common'
 import { Pattern } from 'src/app/models/pattern.model';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { RavelryService } from 'src/app/services/ravelry.service';
 
@@ -13,21 +13,8 @@ import { RavelryService } from 'src/app/services/ravelry.service';
 })
 export class PatternDetailsComponent implements OnInit {
   pattern$: Observable<Pattern>;
-
-  //TODO generate this from ravelry images
-  imageObject: Array<object> = [{
-    image: 'assets/images/welna3.png',
-    thumbImage: 'assets/img/slider/1_min.jpeg',
-    alt: 'alt of image',
-    title: 'title of image'
-}, {
-    image: 'assets/images/no-results-batcat.svg', // Support base64 image
-    thumbImage: '.../iOe/xHHf4nf8AE75h3j1x64ZmZ//Z==', // Support base64 image
-    title: 'Image title', //Optional: You can use this key if want to show image with title
-    alt: 'Image alt', //Optional: You can use this key if want to show image with alt
-    order: 1 //Optional: if you pass this key then slider images will be arrange according @input: slideOrderType
-}
-];
+  showSpinner: boolean = true;
+  showError: boolean;
 
   constructor(
     private location: Location,
@@ -36,13 +23,42 @@ export class PatternDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.showError = false;
     this.pattern$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.ravelryService.getPatternDetails(params.get('id')))
+        this.ravelryService.getPatternDetails(params.get('id'))
+          .pipe(
+            map(pattern => {
+              return this.mapImages(pattern)
+            }),
+            catchError((error) => {
+              this.showError = true;
+              return of(error);
+            }),
+            finalize(() => this.showSpinner = false)
+          )
+      )
     );
   }
 
   back(): void {
     this.location.back()
+  }
+
+  onTryAgain(): void {
+    this.ngOnInit();
+  }
+
+  private mapImages(pattern): Pattern {
+    return {
+      ...pattern,
+      sliderImages: pattern.photos.map(
+        photo => {
+          return {
+            image: photo.medium2_url,
+            thumbImage: photo.small_url,
+          }
+        })
+    }
   }
 }

@@ -1,13 +1,21 @@
-<div *ngIf="pattern$ | async as pattern" class="details__grid">
+<div *ngIf="!showError && (pattern$ | async) as pattern" class="details__grid">
     <div class="details__header">
-        <pattern-details-table *ngIf="pattern$" [pattern]="pattern$ | async">
+        <pattern-details-table *ngIf="pattern" [pattern]="pattern">
         </pattern-details-table>
-
     </div>
-
-    <div class="details__images-menu"></div>
     <div class="details__images">
-        <ng-image-slider [images]="imageObject" #nav></ng-image-slider>
+        <ng-image-slider [images]="pattern.sliderImages" [manageImageRatio]="true"></ng-image-slider>
     </div>
-    <div class="details__content"></div>
+    <div class="details__content">
+        <button mat-button color="primary" mat-flat-button>
+            <a href="{{ 'https://ravelry.com/patterns/library/' + pattern.permalink }}" target="_blank">
+                ZOBACZ W RAVELRY
+            </a>
+        </button>
+    </div>
 </div>
+
+<spinner *ngIf="showSpinner"></spinner>
+<something-went-wrong *ngIf="!showSpinner && showError"
+(tryAgainEvent)="onTryAgain()" class="pattern-search__error">
+</something-went-wrong>

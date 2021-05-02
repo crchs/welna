@@ -29,6 +29,7 @@ import { NoResultsComponent } from './shared-components/no-results/no-results.co
 import { PatternDetailsComponent } from './search-for-pattern/pattern-details/pattern-details.component';
 import { PatternDetailsTableComponent } from './search-for-pattern/pattern-details/pattern-details-table/pattern-details-table.component';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
     MatCardModule,
     MatGridListModule,
     NgImageSliderModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

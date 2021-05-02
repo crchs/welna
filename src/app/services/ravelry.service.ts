@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { concatMap, filter, map, shareReplay, tap, toArray } from 'rxjs/operators';
+import { concatMap, filter, map, shareReplay, toArray } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { CraftType } from '../models/craftType.enum';
 import { NeedleSize } from '../models/needle-size.model';

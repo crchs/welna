@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
@@ -12,8 +12,6 @@ import { RavelryService } from '../services/ravelry.service';
 })
 export class SearchForPatternComponent {
   detailsOpened: boolean;
-
-  //TODO if a call was made to the service previously, the data should be prefilled
   patterns$: Observable<PatternPartial[]>;
   showSpinner: boolean = false;
   showError: boolean = false;
@@ -56,7 +54,6 @@ export class SearchForPatternComponent {
   }
 
   onActivate(e): void {
-    console.log('eeeeeeeeeee', e)
     this.detailsOpened = true;
   }
   onDeactivate(e): void {

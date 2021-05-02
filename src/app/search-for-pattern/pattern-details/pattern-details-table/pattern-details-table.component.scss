@@ -10,19 +10,24 @@
 
     &__table {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+
+
+        @media (max-width: 800px) {
+            flex-direction: column;
+        }
+    }
+
+    &__item {
+        margin-bottom: 1em;
 
         h3 {
             font-weight: 500;
             margin-bottom: 0;
         }
+    }
 
-        &-item {
-            margin-bottom: 1em;
-        }
-
-        @media (max-width: 800px) {
-            flex-direction: column;
-        }
+    &__difficulty{
+        margin-bottom: 2rem;
     }
 }
