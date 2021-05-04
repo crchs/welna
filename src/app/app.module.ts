@@ -30,6 +30,7 @@ import { PatternDetailsComponent } from './search-for-pattern/pattern-details/pa
 import { PatternDetailsTableComponent } from './search-for-pattern/pattern-details/pattern-details-table/pattern-details-table.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InstructionsPanelComponent } from './shared-components/instructions-panel/instructions-panel.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     NoResultsComponent,
     PatternDetailsComponent,
     PatternDetailsTableComponent,
+    InstructionsPanelComponent,
   ],
   imports: [
     HttpClientModule,

@@ -7,6 +7,9 @@
     <something-went-wrong *ngIf="!showSpinner && showError"
         (tryAgainEvent)="onTryAgain()" class="pattern-search__error">
     </something-went-wrong>
+    <instructions-panel *ngIf="!(wasInstructionsPanelSeen$ | async)"
+        class="pattern-search__instructions">
+    </instructions-panel>
 </div>
 <router-outlet (activate)="onActivate($event)"
     (deactivate)="onDeactivate($event)">

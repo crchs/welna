@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { PatternPartial } from '../models/pattern-partial.model';
 import { RavelryService } from '../services/ravelry.service';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'search-for-pattern',
@@ -21,14 +22,17 @@ export class SearchForPatternComponent {
     searchedCategory: '',
     searchedIsFree: ''
   }
+  wasInstructionsPanelSeen$ = this.store.getInstructionsPanelSeen();
 
   constructor(
     private ravelry: RavelryService,
-    private router: Router
+    private router: Router,
+    private store: StoreService,
   ) { }
 
   onSearchPattern(event?): void {
     this.router.navigate(['/schemat']);
+    this.store.setInstructionsPanelSeen();
     this.showSpinner = true;
     this.showError = false;
     this.searchParams = event === 'retry' ? this.searchParams : {
