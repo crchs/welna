@@ -1,6 +1,6 @@
 <div class="card-list">
-  <mat-card class="card-list__item" *ngFor="let pattern of patterns$" 
-  [routerLink]="['/schemat', pattern.id]">
+  <mat-card class="card-list__item" *ngFor="let pattern of patterns$">
+    <a [routerLink]="['/schemat', pattern.id]">
       <mat-card-header class="card-list__item__header">
         <mat-card-title>{{ pattern.name }}</mat-card-title>
         <mat-card-subtitle>{{ pattern.designer.name }}</mat-card-subtitle>
@@ -13,6 +13,7 @@
             class="card-list__item__image">
         </div>
       </mat-card-content>
+    </a>
   </mat-card>
 </div>
 
