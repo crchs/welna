@@ -30,12 +30,12 @@ export class StoreService {
 
   /* Patterns */
 
-  fetchPatterns(searchParams?, page = 1): void {
+  fetchPatterns(searchParams?, page?): void {
     this._patternsError.next(false);
     this._patternsSpinner.next(true);
-    this.lastParams = !this.lastParams ? searchParams : this.lastParams;
+    this.lastParams = (!this.lastParams || !page) ? searchParams : this.lastParams;
 
-    this.ravelry.searchForPatterns(searchParams || this.lastParams, page)
+    this.ravelry.searchForPatterns(searchParams || this.lastParams, page || 1)
       .subscribe(
         patternData => {
           this._patterns.next(patternData.patterns)
