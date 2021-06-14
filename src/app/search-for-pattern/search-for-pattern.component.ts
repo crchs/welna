@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
-import { PatternPartial } from '../models/pattern-partial.model';
-import { RavelryService } from '../services/ravelry.service';
+import { Paginator } from '../models/paginator.model';
 import { StoreService } from '../services/store.service';
 
 @Component({
@@ -12,10 +10,10 @@ import { StoreService } from '../services/store.service';
   styleUrls: ['./search-for-pattern.component.scss']
 })
 export class SearchForPatternComponent {
-  detailsOpened: boolean;
-  patterns$: Observable<PatternPartial[]>;
-  showSpinner: boolean = false;
-  showError: boolean = false;
+  detailsOpened: boolean;      
+  showSpinner: Observable<boolean> = this.store.getSpinnerStatus();
+  pageLoaded$: Observable<Paginator | undefined> = this.store.getPagination();
+  showError: Observable<boolean> = this.store.getErrorStatus();
   searchParams: any = {
     searchedCraft: '',
     searchedNeedleSize: '',
@@ -25,7 +23,6 @@ export class SearchForPatternComponent {
   wasInstructionsPanelSeen$ = this.store.getInstructionsPanelSeen();
 
   constructor(
-    private ravelry: RavelryService,
     private router: Router,
     private store: StoreService,
   ) { }
@@ -33,28 +30,18 @@ export class SearchForPatternComponent {
   onSearchPattern(event?): void {
     this.router.navigate(['/schemat']);
     this.store.setInstructionsPanelSeen();
-    this.showSpinner = true;
-    this.showError = false;
-    this.searchParams = event === 'retry' ? this.searchParams : {
+    this.searchParams =  {
       craft: event.craft,
       needleSize: event.needleSize,
       category: event.category,
       isFree: event.isFree
     }
 
-    this.patterns$ = this.ravelry.searchForPatterns(
-      this.searchParams
-    ).pipe(
-      catchError((error) => {
-        this.showError = true;
-        return of(error);
-      }),
-      finalize(() => { this.showSpinner = false; })
-    )
+    this.store.fetchPatterns(this.searchParams);
   }
 
   onTryAgain(): void {
-    this.onSearchPattern('retry');
+    this.store.fetchPatterns();
   }
 
   onActivate(e): void {

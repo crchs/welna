@@ -1,20 +1,24 @@
+<mat-paginator *ngIf="patterns$.length > 0" [length]="pageInfo$?.results"
+  [pageSize]="30" (page)="pageEvent = fetchMorePatterns($event)">
+</mat-paginator>
+
+<spinner *ngIf="spinner | async"></spinner>
+<no-results *ngIf="!(spinner | async) && patterns$.length === 0 && pageInfo$">
+</no-results>
+
 <div class="card-list">
-  <mat-card class="card-list__item" *ngFor="let pattern of patterns$" 
-  [routerLink]="['/schemat', pattern.id]">
-      <mat-card-header class="card-list__item__header">
-        <mat-card-title>{{ pattern.name }}</mat-card-title>
-        <mat-card-subtitle>{{ pattern.designer.name }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content class="card-list__item__content">
-        <div class="card-list__item__image-container">
-          <img mat-card-image src="{{ pattern.first_photo?.small_url }}"
-            onerror="this.src='assets/images/default-image.svg'"
-            alt="pattern image"
-            class="card-list__item__image">
-        </div>
-      </mat-card-content>
+  <mat-card class="card-list__item" *ngFor="let pattern of patterns$"
+    [routerLink]="['/schemat', pattern.id]">
+    <mat-card-header class="card-list__item__header">
+      <mat-card-title>{{ pattern.name }}</mat-card-title>
+      <mat-card-subtitle>{{ pattern.designer.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-list__item__content">
+      <div class="card-list__item__image-container">
+        <img mat-card-image src="{{ pattern.first_photo?.small_url }}"
+          onerror="this.src='assets/images/default-image.svg'"
+          alt="pattern image" class="card-list__item__image">
+      </div>
+    </mat-card-content>
   </mat-card>
 </div>
-
-<spinner *ngIf="spinner"></spinner>
-<no-results *ngIf="!spinner && !patterns$?.length"></no-results>
