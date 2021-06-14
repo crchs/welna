@@ -1,10 +1,10 @@
 <div *ngIf="!detailsOpened" class="pattern-search">
     <pattern-form (searchPattern)="onSearchPattern($event)"
         class="pattern-search__form"></pattern-form>
-    <pattern-list [patterns$]="patterns$ | async" [spinner]="showSpinner"
-        class="pattern-search__list" *ngIf="patterns$ && !showError">
+    <pattern-list
+        class="pattern-search__list" *ngIf="!(showError | async) && (pageLoaded$ | async)">
     </pattern-list>
-    <something-went-wrong *ngIf="!showSpinner && showError"
+    <something-went-wrong *ngIf="!(showSpinner | async) && (showError | async)"
         (tryAgainEvent)="onTryAgain()" class="pattern-search__error">
     </something-went-wrong>
     <instructions-panel *ngIf="!(wasInstructionsPanelSeen$ | async)"

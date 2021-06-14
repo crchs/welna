@@ -31,6 +31,7 @@ import { PatternDetailsTableComponent } from './search-for-pattern/pattern-detai
 import { NgImageSliderModule } from 'ng-image-slider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InstructionsPanelComponent } from './shared-components/instructions-panel/instructions-panel.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { InstructionsPanelComponent } from './shared-components/instructions-pan
     MatGridListModule,
     NgImageSliderModule,
     MatProgressBarModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -5,6 +5,7 @@ import { concatMap, filter, map, shareReplay, toArray } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { CraftType } from '../models/craftType.enum';
 import { NeedleSize } from '../models/needle-size.model';
+import { Paginator } from '../models/paginator.model';
 import { PatternPartial } from '../models/pattern-partial.model';
 import { Pattern } from '../models/pattern.model';
 import { CATEGORIES } from './resources/pattern-categories';
@@ -13,12 +14,13 @@ type NeedleSizes = {
   needle_sizes: NeedleSize[];
 }
 
-type Patterns = {
-  patterns: PatternPartial[];
-}
-
 type PatternEnvelope = {
   pattern: Pattern;
+}
+
+type PatternData = {
+  paginator: Paginator,
+  patterns: PatternPartial[]
 }
 
 @Injectable({
@@ -64,21 +66,23 @@ export class RavelryService {
     return of(CATEGORIES);
   }
 
-  searchForPatterns(searchParams): Observable<PatternPartial[]> {
+  searchForPatterns(searchParams, page: number): Observable<PatternData> {
     let params = new HttpParams();
     params = params.append('craft', searchParams.craft);
     params = params.append(searchParams.craft === CraftType.CROCHET ? 'hooks' : 'needles', `${searchParams.needleSize}mm`);
     params = params.append('pc', searchParams.category);
     params = params.append('availability', searchParams.isFree ? 'free' : '');
+    params = params.append('page_size', '30');
+    params = params.append('page', page.toString());
 
     return this.http
-      .get<Patterns>(`${this.ravelryBaseUrl}patterns/search.json`, {
+      .get<PatternData>(`${this.ravelryBaseUrl}patterns/search.json`, {
         headers: this.httpHeaders,
         params: params
       })
       .pipe(
         map(response => {
-          return response.patterns
+          return response
         })
       )
   }
@@ -97,6 +101,6 @@ export class RavelryService {
   }
 
   private getPopularSizes(size: number): boolean {
-    return size > 2 && size < 7
+    return size >= 2 && size < 7
   }
 }
