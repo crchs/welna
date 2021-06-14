@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "welna-6b60c": {
+      "hosting": {
+        "welna": [
+          "welna-6b60c"
+        ]
+      }
+    }
+  }
+}
